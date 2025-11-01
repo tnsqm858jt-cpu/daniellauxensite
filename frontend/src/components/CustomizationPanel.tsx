@@ -72,49 +72,7 @@ const CustomizationPanel: React.FC<CustomizationPanelProps> = ({ onClose, theme 
 
   const presetApplied = useMemo(() => {
     if (!selectedPreset) return false;
-    const widgetsMatch = selectedPreset.recommendedWidgets.every(
-      (widget) => widgets[widget as keyof ThemePreferences['widgets']]
-    );
     return (
-      selectedPreset.palette.primary === primaryColor &&
-      selectedPreset.background === background &&
-      selectedPreset.fontFamily === fontFamily &&
-      widgetsMatch
-    );
-  }, [selectedPreset, primaryColor, background, fontFamily, widgets]);
-
-  const handleImage = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setAvatar(typeof reader.result === 'string' ? reader.result : '');
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleSave = async () => {
-    if (!user) return;
-    setSaving(true);
-    try {
-      await updateProfile({
-        name,
-        bio,
-        avatarUrl: avatar,
-        theme: {
-          primaryColor,
-          mode,
-          background,
-          fontFamily,
-          widgets,
-        },
-      });
-    } catch (error) {
-      console.error('Falha ao salvar personalização', error);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  return (
     <aside
       className="fade-in brutalist-panel"
       style={{
