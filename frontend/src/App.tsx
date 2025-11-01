@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import FocusPage from './pages/FocusPage';
@@ -6,7 +6,7 @@ import MetasPage from './pages/MetasPage';
 import ProfilePage from './pages/ProfilePage';
 import AppShell from './components/AppShell';
 
-const ProtectedRoutes = () => {
+const ProtectedLayout = () => {
   const { user, loading } = useAuth();
   const location = useLocation();
 
@@ -20,13 +20,7 @@ const ProtectedRoutes = () => {
 
   return (
     <AppShell>
-      <Routes>
-        <Route path="/focus/daniel" element={<FocusPage board="daniel" />} />
-        <Route path="/focus/lauxen" element={<FocusPage board="lauxen" />} />
-        <Route path="/metas" element={<MetasPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="*" element={<Navigate to="/focus/daniel" replace />} />
-      </Routes>
+      <Outlet />
     </AppShell>
   );
 };
@@ -35,7 +29,14 @@ const App = () => (
   <AuthProvider>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/*" element={<ProtectedRoutes />} />
+      <Route element={<ProtectedLayout />}>
+        <Route path="/" element={<Navigate to="/focus/daniel" replace />} />
+        <Route path="/focus/daniel" element={<FocusPage board="daniel" />} />
+        <Route path="/focus/lauxen" element={<FocusPage board="lauxen" />} />
+        <Route path="/metas" element={<MetasPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="*" element={<Navigate to="/focus/daniel" replace />} />
+      </Route>
     </Routes>
   </AuthProvider>
 );

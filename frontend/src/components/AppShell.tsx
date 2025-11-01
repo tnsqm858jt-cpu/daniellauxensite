@@ -27,12 +27,6 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     document.body.style.setProperty('--font-family', theme.fontFamily);
   }, [theme]);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user, navigate]);
-
   const backgroundTexture = useMemo(() => {
     switch (theme?.background) {
       case 'linen':
