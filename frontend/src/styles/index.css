@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Sorts+Mill+Goudy&family=Spectral:wght@400;600&family=Cormorant+Garamond:wght@400;600&family=Playfair+Display:wght@400;700&family=IM+Fell+English&family=Libre+Baskerville:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #c3201f;
+  --background-color: #fdfdf9;
+  --surface-color: #ffffff;
+  --text-color: #161616;
+  --muted-text: #4a4a4a;
+  --border-color: #1f1f1f;
+  --font-family: 'Times New Roman', 'Lora', 'Spectral', serif;
+  --transition: 0.24s ease;
+  --card-radius: 8px;
+  --chip-radius: 4px;
+  --button-radius: 6px;
+  --shadow-strong: 0 28px 90px rgba(0, 0, 0, 0.18);
+  --shadow-soft: 0 14px 40px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme='dark'] {
+  --background-color: #161616;
+  --surface-color: #1f1f1f;
+  --text-color: #f5f5f5;
+  --muted-text: #c7c7c7;
+  --border-color: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background var(--transition), color var(--transition);
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover,
+.nav-link:hover .nav-label,
+.brutalist-button:hover,
+.brutalist-chip:hover,
+.brutalist-card:hover {
+  transform: translateY(-3px);
+}
+
+button {
+  font-family: inherit;
+  transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  border-radius: var(--button-radius);
+  border: 1px solid var(--border-color);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(195, 32, 31, 0.12);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border: 2px solid var(--background-color);
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brutalist-card {
+  border: 2px solid var(--border-color);
+  border-radius: var(--card-radius);
+  background: var(--surface-color);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.brutalist-card:hover {
+  box-shadow: var(--shadow-strong);
+  border-color: var(--primary-color);
+}
+
+.brutalist-panel {
+  border: 2px solid var(--border-color);
+  border-radius: var(--card-radius);
+  background: var(--surface-color);
+  padding: 1.5rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+}
+
+.brutalist-chip {
+  border: 1px solid var(--border-color);
+  border-radius: var(--chip-radius);
+  padding: 0.35rem 0.65rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.02);
+  transition: transform var(--transition), background var(--transition), border-color var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.brutalist-chip[data-tone='accent'] {
+  background: rgba(195, 32, 31, 0.12);
+  border-color: rgba(195, 32, 31, 0.6);
+}
+
+.brutalist-button {
+  border: 2px solid var(--border-color);
+  border-radius: var(--button-radius);
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.brutalist-button[data-variant='primary'] {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.brutalist-button[data-variant='minimal'] {
+  border-style: dashed;
+}
+
+.brutalist-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.brutalist-divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.brutalist-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.brutalist-hover {
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.brutalist-hover:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-color);
+}
+
+.nav-link .nav-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.nav-link.active .nav-label::after,
+.nav-link:hover .nav-label::after {
+  transform: scaleX(1);
+}
+
+.customization-gallery-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
